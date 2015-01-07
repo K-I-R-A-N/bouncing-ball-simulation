@@ -1,3 +1,4 @@
+package bouncingball;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -13,7 +14,7 @@ public class Simulation extends Canvas implements Runnable {
 	private static final Font FONT = new Font("Trebuchet MS", Font.BOLD, 50);
 
 	public static boolean isRunning = false;
-	public static boolean debugMode = false;
+	public static boolean debugMode = true;
 
 	private Thread thread;
 	Window window;
@@ -47,7 +48,7 @@ public class Simulation extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		
+
 	}
 
 	@Override
