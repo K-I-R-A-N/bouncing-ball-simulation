@@ -7,8 +7,8 @@ import java.awt.Point;
 public class Ball extends Entity {
 
 	private static final int DIAMETER = 100;
-	private static final Point START_POS = new Point(640, 0);
-	private static final double START_X_VEL = 0;
+	private static final Point START_POS = new Point(900, 0);
+	private static final double START_X_VEL = -1;
 	private static final double START_Y_VEL = 0;
 	// Coefficient of restitution is how much speed is retained after bounce.
 	private static final double COR = 0.5;
@@ -34,18 +34,28 @@ public class Ball extends Entity {
 	@Override
 	public void render(Graphics2D g) {
 		g.setColor(Color.GREEN);
-		g.drawOval((int) getX(),(int) getY(),(int) getWidth(),(int) getHeight());
+		g.fillOval((int) getX(), (int) getY(), (int) getWidth(),
+				(int) getHeight());
 	}
 
 	@Override
 	public void tick() {
-		if (getY() >= s.window.getHeight() - 20 - DIAMETER) {	
+		if (getY() >= s.getHeight() - getHeight()) {
+			if (getY() > s.getHeight() - getHeight())
+				setY(s.getHeight() - getHeight());
 			velY = -velY * COR;
 		}
-		
+
+		if (velX != 0 && getX() >= s.getHeight() - getHeight()) {
+			if (velX > 0)
+				velX -= 0.005;
+			else if (velX < 0)
+				velX += 0.005;
+		}
+
 		velY += GRAVITY;
 		setX(getX() + velX);
-		setY(getY() + velY);	
+		setY(getY() + velY);
 	}
 
 	public double getVelX() {
