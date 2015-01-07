@@ -7,16 +7,19 @@ import java.awt.Point;
 public class Ball extends Entity {
 
 	private static final int DIAMETER = 100;
-	private static final Point START_POS = new Point(900, 0);
-	private static final double START_X_VEL = -1;
-	private static final double START_Y_VEL = 0;
+	private static final Point START_POS = new Point(0, 0);
+	private static final double START_X_VEL = 1;
+	private static final double START_Y_VEL = 1;
 	// Coefficient of restitution is how much speed is retained after bounce.
 	private static final double COR = 0.5;
 	// True gravity is the gravitational acceleration to the floor.
 	private static final double TRUE_GRAVITY = 9.81;
 	// Gravity is the acceleration per tick.
 	private static final double GRAVITY = TRUE_GRAVITY / Simulation.TICK_RATE;
-
+	// Friction variable. This is arbritary until I've got a way to calculate
+	// velocity lost on a surface
+	private static final double FRICTION = 0.005;
+	
 	// These are the variables for the x and y velocities at any one time.
 	private double velX = START_X_VEL;
 	private double velY = START_Y_VEL;
@@ -48,9 +51,9 @@ public class Ball extends Entity {
 
 		if (velX != 0 && getX() >= s.getHeight() - getHeight()) {
 			if (velX > 0)
-				velX -= 0.005;
+				velX -= FRICTION;
 			else if (velX < 0)
-				velX += 0.005;
+				velX += FRICTION;
 		}
 
 		velY += GRAVITY;
