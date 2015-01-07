@@ -4,16 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public abstract class Entity {
-	double x;
-	double y;
-	double width;
-	double height;
+	private double x;
+	private double y;
+	private double width;
+	private double height;
 
-	public void render(Graphics2D g) {
-	}
+	public abstract void render(Graphics2D g);
 
-	public void tick() {
-	}
+	public abstract void tick();
 
 	public Rectangle getBounds() {
 		return new Rectangle((int) x, (int) y, (int) width, (int) height);

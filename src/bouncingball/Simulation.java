@@ -1,4 +1,5 @@
 package bouncingball;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Font;
@@ -9,7 +10,7 @@ public class Simulation extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final double TICK_RATE = 60;
+	public static final double TICK_RATE = 60;
 
 	private static final Font FONT = new Font("Trebuchet MS", Font.BOLD, 50);
 
@@ -18,6 +19,8 @@ public class Simulation extends Canvas implements Runnable {
 
 	private Thread thread;
 	Window window;
+
+	private Ball ball;
 
 	public Simulation(Window w) {
 		window = w;
@@ -33,11 +36,16 @@ public class Simulation extends Canvas implements Runnable {
 
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 
-		g.setFont(FONT);
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 
-		// Draw stuff here!
+		g.setColor(Color.black);
+		g.drawString(
+				"X: " + ball.getX() + " Y: " + ball.getY() + " X Velocity: "
+						+ ball.getVelX() + " Y Velocity: " + ball.getVelY(), 5,
+				20);
+
+		ball.render(g);
 
 		if (debugMode) {
 			// Debug info here!
@@ -48,7 +56,7 @@ public class Simulation extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-
+		ball.tick();
 	}
 
 	@Override
@@ -99,6 +107,9 @@ public class Simulation extends Canvas implements Runnable {
 		if (isRunning)
 			return;
 		isRunning = true;
+
+		ball = new Ball(this);
+
 		thread = new Thread(this);
 		thread.start();
 	}
