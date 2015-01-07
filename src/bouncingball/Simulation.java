@@ -40,10 +40,9 @@ public class Simulation extends Canvas implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 
 		g.setColor(Color.black);
-		g.drawString(
-				"X: " + (int) ball.getX() + " Y: " + (int) ball.getY() + " X Velocity: "
-						+ (int) ball.getVelX() + " Y Velocity: " + (int) ball.getVelY(), 5,
-				20);
+		g.drawString("X: " + (int) ball.getX() + " Y: " + (int) ball.getY()
+				+ " X Velocity: " + (int) ball.getVelX() + " Y Velocity: "
+				+ (int) ball.getVelY(), 5, 15);
 
 		ball.render(g);
 

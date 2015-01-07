@@ -6,10 +6,10 @@ import java.awt.Point;
 
 public class Ball extends Entity {
 
-	private static final int DIAMETER = 100;
+	private static final int DIAMETER = 30;
 	private static final Point START_POS = new Point(0, 0);
-	private static final double START_X_VEL = 1;
-	private static final double START_Y_VEL = 1;
+	private static final double START_X_VEL = 2;
+	private static final double START_Y_VEL = 0;
 	// Coefficient of restitution is how much speed is retained after bounce.
 	private static final double COR = 0.5;
 	// True gravity is the gravitational acceleration to the floor.
