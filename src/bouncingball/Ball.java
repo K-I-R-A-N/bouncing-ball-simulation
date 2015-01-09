@@ -9,10 +9,10 @@ public class Ball extends Entity {
 
 	private static final int DIAMETER = 30;
 	private static final Point START_POS = new Point(0, 0);
-	private static final double START_X_VEL = 2;
-	private static final double START_Y_VEL = 0;
+	private static final double START_X_VEL = 30;
+	private static final double START_Y_VEL = 100;
 	// Coefficient of restitution is how much speed is retained after bounce.
-	private static final double COR = 0.9;
+	private static final double COR = 0.8;
 	// True gravity is the gravitational acceleration to the floor.
 	private static final double TRUE_GRAVITY = 9.81;
 	// Gravity is the acceleration per tick.
@@ -55,6 +55,20 @@ public class Ball extends Entity {
 			if (getY() > s.getHeight() - getHeight())
 				setY(s.getHeight() - getHeight());
 			velY = -velY * COR;
+		} else if (getY() <= 0) {
+			if (getY() < 0)
+				setY(0);
+			velY = -velY * COR;
+		}
+		
+		if (getX() >= s.getWidth() - getWidth()) {
+			if (getX() > s.getWidth() - getWidth())
+				setX(s.getWidth() - getWidth());
+			velX = -velX * COR;
+		} else if (getX() <= 0) {
+			if (getX() < 0)
+				setX(0);
+			velX = -velX * COR;
 		}
 
 		if (velX != 0 && getY() >= s.getHeight() - getHeight()) {
