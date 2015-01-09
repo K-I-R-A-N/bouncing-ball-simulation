@@ -16,7 +16,7 @@ public class Ball extends Entity {
 	private static final double TRUE_GRAVITY = 9.81;
 	// Gravity is the acceleration per tick.
 	private static final double GRAVITY = TRUE_GRAVITY / Simulation.TICK_RATE;
-	// Friction variable. This is arbritary until I've got a way to calculate
+	// Friction variable. This is arbitrary until I've got a way to calculate
 	// velocity lost on a surface
 	private static final double FRICTION = 0.005;
 	
@@ -50,10 +50,13 @@ public class Ball extends Entity {
 		}
 
 		if (velX != 0 && getX() >= s.getHeight() - getHeight()) {
-			if (velX > 0)
+			if (velX > FRICTION)
 				velX -= FRICTION;
-			else if (velX < 0)
+			else if (velX < -FRICTION)
 				velX += FRICTION;
+			else {
+				velX = 0;
+			}
 		}
 
 		velY += GRAVITY;
