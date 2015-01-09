@@ -57,7 +57,7 @@ public class Ball extends Entity {
 			velY = -velY * COR;
 		}
 
-		if (velX != 0 && getX() >= s.getHeight() - getHeight()) {
+		if (velX != 0 && getY() >= s.getHeight() - getHeight()) {
 			if (velX > FRICTION)
 				velX -= FRICTION;
 			else if (velX < -FRICTION)
