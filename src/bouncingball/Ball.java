@@ -3,6 +3,7 @@ package bouncingball;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.ArrayList;
 
 public class Ball extends Entity {
 
@@ -11,7 +12,7 @@ public class Ball extends Entity {
 	private static final double START_X_VEL = 2;
 	private static final double START_Y_VEL = 0;
 	// Coefficient of restitution is how much speed is retained after bounce.
-	private static final double COR = 0.5;
+	private static final double COR = 0.9;
 	// True gravity is the gravitational acceleration to the floor.
 	private static final double TRUE_GRAVITY = 9.81;
 	// Gravity is the acceleration per tick.
@@ -19,12 +20,14 @@ public class Ball extends Entity {
 	// Friction variable. This is arbitrary until I've got a way to calculate
 	// velocity lost on a surface
 	private static final double FRICTION = 0.005;
-	
+
 	// These are the variables for the x and y velocities at any one time.
 	private double velX = START_X_VEL;
 	private double velY = START_Y_VEL;
 
 	private Simulation s;
+
+	private ArrayList<Point> points = new ArrayList<>();
 
 	public Ball(Simulation s) {
 		this.s = s;
@@ -36,6 +39,11 @@ public class Ball extends Entity {
 
 	@Override
 	public void render(Graphics2D g) {
+		g.setColor(Color.BLACK);
+		for (Point p : points) {
+			g.fillOval((int) (p.getX() + getWidth() / 2),
+					(int) (p.getY() + getHeight() / 2), 2, 2);
+		}
 		g.setColor(Color.GREEN);
 		g.fillOval((int) getX(), (int) getY(), (int) getWidth(),
 				(int) getHeight());
@@ -62,6 +70,8 @@ public class Ball extends Entity {
 		velY += GRAVITY;
 		setX(getX() + velX);
 		setY(getY() + velY);
+
+		points.add(new Point((int) getX(), (int) getY()));
 	}
 
 	public double getVelX() {
